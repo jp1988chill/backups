@@ -1,0 +1,202 @@
+.tweets li{color:#000}
+#cnn-flipper-viewer{margin-left:5px}
+
+/* @start CNN SECTION NAV */
+h1 { padding-top:0; }
+#cnn_hdr * { font-size:1.04em; }
+/* @end CNN SECTION NAV */
+
+/* @start SPOTLIGHT */
+.cnnWideImage .cnn_video { margin-bottom:-22px; }
+/* @end SPOTLIGHT */
+
+/* @start CNN MENU NAV */
+.cnn_std_header { position:relative; width:980px; height:265px; margin-left:5px; }
+.cnn_std_header_image_bx { width:980px; height:265px;background:#fff url('http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/globalpublicsquare/header_bk.d.jpg') no-repeat scroll 0 0;background-position:top center; }
+.cnn_std_header img {width:980px; height:225px;}
+.cnn_menu_bx { position:absolute; left:0; width:980px; bottom:0; height:40px; }
+.cnn_menu { height:40px; background:url( http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/globalpublicsquare/menu_bg.png ) repeat-x 0 0; padding-left:12px; }
+.menu-item { line-height:40px; padding:0 14px; background:url( http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/globalpublicsquare/menu_divider.gif ) no-repeat 0 13px; }
+.menu-item a { color:#fff; font-size:14px; font-weight:bold; font-family:arial,sans-serif; }
+.current-menu-item a, .current-menu-item a:hover { color:#000; cursor:default; }
+.menu-item-home { background:none; }
+/* @start CNN MENU NAV */
+
+/* @start POST NAVIGATION CSS */
+.cnn_post_navigation { background:#fff; border-bottom:none; height:auto; }
+.cnn_post_navigation_home { padding:0 0 0 20px; margin:0; height:38px; }
+.cnn_post_navigation_home a, .single-post .cnn_post_navigation a { float:left; color:#004276; }
+.cnn_post_navigation_home a { line-height:38px; }
+.single-post .cnn_post_navigation a { line-height:1.2em; }
+.cnn_post_navigation_home a:hover, .single-post .cnn_post_navigation a:hover { color:#ca0002; }
+.cnn_divider_column_3 { margin:10px; border-right:1px solid #959595; }
+.cnn-nav-text { color:#999; display:block; margin-bottom:2px; font-size:11px; font-weight:bold; line-height:1.2em; text-align:left; }
+.single-post .cnn_post_navigation { padding:0 0 0 10px; margin-top:7px; font-size:14px; line-height:1.2em; }
+.single-post .cnn_next .cnn-nav-text, .single-post .cnn_next a { text-align:right; }
+.single-post .cnn_prev .cnn-nav-text, .single-post .cnn_prev a { text-align:left; }
+.single-post .cnn_prev { padding-left:0; }
+/* @end POST NAVIGATION CSS */
+
+/* @start GENERAL CSS */
+.globalpublicsquare, .cnn_container { background-color:#fbfbfb; }
+.cnn_anchor_avatar { margin-left:-15px; float:left; padding-top:3px; padding-right:3px; }
+#commentform #submit { background:url("http://web.archive.org/web/20141022083259im_/http://media.disqus.com/images/themes/cnn/090509_personalization_sprite_rr.gif") no-repeat scroll -2px -306px transparent; margin-left:8px; margin-right:10px; width:47px; }
+/* @end GENERAL CSS */
+
+/* @start FOOTER CSS */
+#cnn_ftrcntnt { background:#fbfbfb;}
+#ftr-search form { width:301px; background:none; }
+#cnn_ftrcntnt a { color:#004276; }
+#cnn_ftrcntnt a:hover { color:#ca0002; }
+#cnn_ftrcntnt, #cnn_ftrcntntinner { width:990px; }
+/* @end FOOTER CSS */
+
+/* @start SIDEBAR CSS*/
+.cnnRRStruct { background-color:#fff; }
+.cnn_sidebar *, .cnn_sidebar a { font-size:11px; }
+.cnn_sidebar .cnn_widget_title { font-family:arial, sans-serif; font-weight:bold; font-size:18px; line-height:1.2em; color:#000; padding-bottom:9px; }
+.cnn_sidebar .cnn_widget_title a{font-size:18px;line-height:1.2em;font-weight:bold;font-family:arial,sans-serif}
+.cnn_widget { font-family:arial, sans-serif; line-height:1.2em; color:#000; }
+.cnn_widget { border-bottom:1px solid #e6e6e6; padding-top:11px; padding-bottom:16px; width:312px; margin-left:12px; }
+.cnn_widget a:link, .cnn_widget a:visited { color:#004276; }
+.cnn_widget a:hover { color:#ca0002; }
+.cnn_widget p { margin:0; }
+.cnn-promo-image { float:left; margin-top:3px; margin-right:14px; }
+.cnn-promo-time { display:block; }
+.cnn_widget blockquote { margin:0 0 0 21px; padding-left:0; border-left:none; color:#000; }
+.cnn_widget blockquote ul { width:289px; float:left; clear:both; padding-top:10px; }
+.cnn_widget blockquote li{ margin-top:2px; margin-bottom:0; }
+.cnn_cnn_page_widget h3 { font-size:14px; margin-top:15px; margin-bottom:7px; }
+.cnn_cnn_page_widget h4 { padding-top:14px; }
+.cnn_dasher { border-top:1px dotted #000; padding-top:17px; margin-top:3px; padding-bottom:8px; }
+.cnn_widget_recent_entries ul { margin-bottom:-15px; }
+.cnn_cnn_widget_adtag { width:336px; margin:0; border-bottom:none; }
+.cnn_adtitle { margin-top:3px; padding:0 12px; text-align:right; }
+.cnn_social_icon_facebook { background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/global/light_theme/14x14_icon_facebook.gif) no-repeat 0 0; }
+.cnn_social_icon_twitter { background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/global/light_theme/14x14_icon_twitter.gif) no-repeat 0 0; }
+.cnn_social_icon_rss { background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/global/light_theme/14x14_icon_rss.gif) no-repeat 0 0; }
+/* @end SIDEBAR CSS*/
+
+/* @start POST LEFT COLUMN */
+.cnnWideImage { padding-left:0; }
+.cnnBlogContentDateHead { font-weight:normal; font-size:11px; line-height:1.2em; padding-top:17px; }
+.cnnGryTmeStmp { color:#999; padding-top:0; padding-bottom:9px; }
+.cnn_comment_count { font-size:9px; line-height:1.2em; }
+.cnnBlogContentDateHead, .cnnGryTmeStmp, .cnn_share_links { padding-left:10px; }
+.cnn_fb_button { padding-left:10px; }
+
+	/* @start SKIN */
+	.cnn_share_links a { font-size:11px; line-height:1.845em; }
+	.cnn_comment_count a { font-size:9px; line-height:1.2em; }
+	.cnn_share_links a:link, .cnn_share_links a:visited { color:#004276; }
+	.cnn_share_links a:hover { color:#ca0002; }
+	/* @end SKIN */
+/* @end POST LEFT COLUMN */
+
+/* @start POST RIGHT COLUMN */
+.cnnBlogContentTitle { font-size:20px; font-family:arial, sans-serif; padding-top:18px; line-height:1em; }
+.cnnBlogContentPost { padding-top:0; }
+.cnnBlogFiledBy { line-height:1.2em; color:#999; display:block; margin-top:6px; }
+.cnnPostFooter { border:none; padding:0; margin-top:17px; }
+.cnn_author { display:block; line-height:1.2em; }
+.cnn_author_info { padding-top:1px; }
+.cnn_categories { display:block; margin-top:8px; }
+
+	/* @start SKIN */
+	.cnnBlogContentPost .cnn_first { margin-top:5px; }
+	.cnnPostFooter table img { padding:0; float:none; }
+	.cnnBlogContentPost p { padding-bottom:0; margin-bottom:0; margin-top:11px; line-height:1.5em; }
+	.cnnPostFooter a:link, .cnnPostFooter a:visited { color:#004276; }
+	.cnnPostFooter a:hover { color:#ca0002; }
+	.cnnBlogContentTitle a:link, .cnnBlogContentTitle a:visited { color:#004276; }
+	.cnnBlogContentTitle a:hover { color:#ca0002; }
+	a.more-link:link, a.more-link:visited { color:#004276; } 
+	a.more-link:hover { color:#ca0002; } 
+	/* @end SKIN */
+/* @end POST RIGHT COLUMN */
+
+/* @start SHADING CSS */
+.cnn_blog_2col_shdbx .cnn_shdtop {  }
+.cnn_blog_2col_shdbx .cnn_shd1 { background-color:#fff; }
+/* @end SHADING CSS */
+
+/* CALENDAR */
+#calendar_wrap #wp-calendar { margin:0; width:100%; background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/belief.blog/calendar_bg.gif) repeat-y -4px 0; }
+*+html #calendar_wrap caption { padding-bottom:10px; border-bottom: 20px solid #fff; }
+#calendar_wrap table th, #calendar_wrap table td { border:none; text-align:center;  width:51px; padding-top:13px; }
+#calendar_wrap table tfoot td { border:none; text-align:center; border-right:none; background:none; }
+#calendar_wrap table tfoot { background:#fff; position:absolute; top:0px; left:270px; height:17px; width:34px; overflow:hidden; _background: #000; _display: block; _right: 0;}
+.cnn-tbl-head { width:44px; }
+*+html #calendar_wrap table tfoot tr { position:absolute; top:0px; left:270px; width:34px; overflow:hidden; }
+#calendar_wrap #prev, #calendar_wrap #next { width:16px; height:16px; background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/belief.blog/belief_sprite.gif) no-repeat; }
+#calendar_wrap #prev a, #calendar_wrap #next a { line-height:80px; _line-height: 17px; _text-indent: -200em;}
+#calendar_wrap tfoot .pad { position:absolute; width:2px; left:18px; }
+#calendar_wrap td.pad:hover { background:transparent; }
+#calendar_wrap { width:315px; position:relative; overflow:hidden; }
+#calendar_wrap table#wp-calendar th { font-size:13px; color:#acacac; font-weight:bold; }
+#calendar_wrap table#wp-calendar td { font-size:13px; color:#7d7d7d; font-weight:bold; }
+#calendar_wrap table#wp-calendar td a { font-size:13px; color:#004276; font-weight:bold; }
+#calendar_wrap table#wp-calendar td a:hover { color:#ca0002; }
+#calendar_wrap caption { font-size:12px; color:#000; margin-bottom:17px; padding-bottom:9px; padding-left:16px; _width: 300px; text-transform:uppercase; }
+#calendar_wrap #prev { background-position:0 -323px; height:17px; top:0; left:0px; _left:272px; padding:0; position:absolute; width:16px; overflow:hidden; }
+#calendar_wrap #next { background-position:0 -359px; height:17px; top:0; left:18px; _left:290px; padding:0; position:absolute; width:16px; overflow:hidden; }
+#calendar_wrap #prev:hover { background-position:0 -1011px; }
+#calendar_wrap #next:hover { background-position:0 -1047px; }
+/* @end CALENDAR */
+
+/* Flipper CSS */
+.cnn_blog_2col_shdbxcnn_shdtop { margin-top:5px; width:990px; height:5px; overflow:hidden; background:url("http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/thecnnfreedomproject/top_right.png") no-repeat 0 0; }
+.cnn-flipper-item{width:188px;height:146px;float:left;border-right:1px solid #fff;margin-right:0}
+.cnn-shdwbx-top { background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/belief.blog/shade.top.right.gif) repeat-y scroll left bottom transparent; margin:5px 0px 0px 0px; }
+.cnn-shdwbx-top .cnn-shdwbx-corner-left { background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/belief.blog/shade.top.left_corner.gif) no-repeat scroll left bottom transparent; }
+.cnn-shdwbx-top .cnn-shdwbx-corner-right { background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/belief.blog/shade.top.right_corner.gif) no-repeat scroll right bottom transparent; }
+.cnn-shdwbx-right { background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/belief.blog/shade.right.5px.gif) repeat-y scroll top right #FFFFFF; margin:0; overflow:hidden; }
+.cnn-shdwbx-left { background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/belief.blog/shade.left.shadow.gif) repeat-y scroll 0 0 transparent; margin:0; overflow:hidden; }
+#cnn-flipper-viewer a { font-size:14px; line-height:16px; font-family:arial, sans-serif; color:#fff; font-weight:bold; display:block; padding:2px 2px 9px 7px; word-spacing:-1.5px; }
+#cnn-flipper-viewer .cnn-nav img { height:146px; width:18px; margin-top:0; visibility:visible; }
+#cnn-flipper-viewer .cnn_fabcprv { background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/belief.blog/left_arrow.gif) no-repeat 0 0; }
+#cnn-flipper-viewer .cnn_fabcnxt { background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/belief.blog/right_arrow.gif) no-repeat 0 0; }
+#cnn-flipper-viewer .cnn_fabcprv_off, #cnn-flipper-viewer .cnn_fabcnxt_off { background:#fff; }
+.cnn-shdwbx-bot { background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/belief.blog/shade.bot.right.gif) no-repeat scroll 0 0 transparent; width:988px; height:5px; margin:0 auto 0px auto; }
+.cnn-shdwbx-bot .cnn-shdwbx-corner-left { background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/belief.blog/shade.bot.left_corner.gif) no-repeat scroll left bottom transparent; width:988px; height:5px; }
+.cnn-shdwbx-bot .cnn-shdwbx-corner-right { background:url(http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/belief.blog/shade.bot.right_corner.gif) no-repeat scroll right bottom transparent; width:988px; height:5px; }
+/* @end Flipper CSS */
+
+/* @start TWITTER */
+#cnnRightCol .cnn_tweet_user a:visited,#cnnRightCol .cnn_tweet_user a,#cnnRightCol .cnn_tweet_retweet a:visited,#cnnRightCol .cnn_tweet_retweet a{color:#004276}
+#cnnRightCol .cnn_tweet_user a::hover,#cnnRightCol .cnn_tweet_retweet a:hover{color:#ca0002}
+.textwidget h2{margin-top:0}
+.cnn_tweet{background:url("http://web.archive.org/web/20141022083259im_/http://i.cdn.turner.com/cnn/.element/img/3.0/sect/blogs/whatsnew/twitter.bubble.png") no-repeat scroll 0 0 transparent}
+.cnn_tweet_desc{color:#333;padding:2px 5px 8px 4px;height:43px;width:303px;font-family:arial,sans-serif;font-size:12px;line-height:1.2em;font-weight:normal}
+#cnnRightCol .cnn_tweet_user a, #cnnRightCol .cnn_tweet_user a:visited { font-family:arial, sans-serif; font-size:12px; line-height:1.2em; font-weight:bold; }
+.cnn_tweet_user { display:block; margin-top:-2px; }
+.cnn_tweet_date { display:block; font-family:arial, sans-serif; font-size:11px; line-height:1.2em; font-weight:normal; font-style:italic; color:#959595; }
+#cnnRightCol .cnn_tweet_retweet a, #cnnRightCol .cnn_tweet_retweet a:visited {font-family:arial,sans-serif;font-size:10px;line-height:1.2em;font-weight:normal}
+.cnn_tweet_info { margin-left:42px; height:53px; }
+.cnn_tweet_info img { float:left; margin-top:2px; margin-right:3px; }
+.cnn_tweet_desc a{line-height:1.2em}
+.cnn_last_tweet{margin-bottom:-10px}
+/* @end TWITTER */
+
+
+
+/*
+     FILE ARCHIVED ON 08:32:59 Oct 22, 2014 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 01:44:22 Jul 23, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 191.382
+  exclusion.robots: 0.065
+  exclusion.robots.policy: 0.058
+  cdx.remote: 0.05
+  esindex: 0.008
+  LoadShardBlock: 108.636 (3)
+  PetaboxLoader3.datanode: 69.775 (5)
+  load_resource: 390.346 (2)
+  PetaboxLoader3.resolve: 276.66 (2)
+*/

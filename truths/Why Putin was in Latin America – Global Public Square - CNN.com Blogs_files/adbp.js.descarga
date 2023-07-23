@@ -1,0 +1,268 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+//mapping for articles
+var cnn_adbpsctnmap = {
+
+
+	'data' : [
+
+		['TECH\/mobile', 'tech', 'tch : mobile'],
+		['TECH\/social\.media', 'tech', 'tch : social media'],
+		['TECH\/web', 'tech', 'tch : web'],
+		['TECH\/innovation', 'tech', 'tch : innovation'],
+		['WORLD\/americas\/archive', 'world', 'wrd : americas'],
+		['WORLD\/asiapcf', 'world', 'wrd : news'],
+		['OPINION\/avlon.commentaries\/archive', 'opinion', 'opn : commentary'],
+		['ireport\/archive', 'ireport', 'irp : archive']
+
+	]
+
+
+};
+
+function cnn_adbpsctnmppng() {
+
+	var t_arr = [];
+
+	var t_url = window.location.href + '';
+
+	var t_map = cnn_adbpsctnmap.data;
+
+	for(i = 0; i < t_map.length; i++) {
+
+		var t_mch = "/" + t_map[i][0] + "/";
+
+		if(t_url.match(t_mch)) {
+			t_map[i].shift();
+			t_arr = t_map[i];
+		}
+
+	}
+
+	//return array containing mapping values
+	return t_arr;
+
+}
+
+//mapping for blogs ... use folder structure to decide if it's a category or story
+var cnn_adbpblogmap = {
+
+
+	'data' : [
+
+		['ac360\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : ac360', 'Anderson Cooper'],
+		['afghanistan\\.blogs\\.cnn\\.com', 'world', 'wrd : afghanistan crossing', ''],
+		['am\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : American Morning', ''],
+		['amanpour\\.blogs\\.cnn\\.com', 'world', 'wrd : amanpour', ''],
+		['amfix\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : american morning', 'american morning'],
+		['backstory\\.blogs\\.cnn\\.com', 'world', 'wrd : backstory', ''],
+		['behindthescenes\\.blogs\\.cnn\\.com', '', 'Behind the Scenes', ''],
+		['bodareal\\.blogs\\.cnn\\.com', 'espanol', 'esp : Bodareal', ''],
+		['business\\.blogs\\.cnn\\.com', 'ibusiness', 'bus: Business 360', ''],
+		['caffertyfile\\.blogs\\.cnn\\.com', 'politics', 'pol : cafferty file', ''],
+		['campbellbrown\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : Campbell Brown', 'Campbell Brown'],
+		['connecttheworld\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : Connect the World', ''],
+		['cnnespanol\\.cnn\\.com', 'espanol', 'esp : Espanol blog', ''],
+		['cnnphotos\\.blogs\\.cnn\\.com', 'world', 'wrd : cnn photos', ''],
+		['cnnpresents\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : cnnpresents', ''],
+		['cnnpressroom\\.blogs\\.cnn\\.com', 'other', 'CNN Press Room', ''],
+		['cnnradio\\.cnn\\.com', 'Radio', 'CNN Radio', ''],
+		['crossfire\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : crossfire', 'crossfire'],
+		['drdrew\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : dr drew', 'dr drew'],
+		['earlystart\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : earlystart', 'earlystart'],
+		['eatocracy\\.cnn\\.com', 'living', 'lvg : eatocracy', ''],
+		['geekout\\.blogs\\.cnn\\.com', 'living', 'lvg : geek out', ''],
+		['globalpublicsquare\\.blogs\\.cnn\\.com', 'world', 'wrd : global public square', 'Fareed Zakaria'],
+		['goalmouth\\.blogs\\.cnn\\.com', 'isport', 'spr: Goalmouth', ''],
+		['inamerica\\.blogs\\.cnn\\.com', 'us', 'us : in america', ''],
+		['insession\\.blogs\\.cnn\\.com', 'crime', 'crm : in session', ''],
+		['insidethemiddleeast\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : Inside the Middle East', ''],
+		['insideman\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : Inside Man', 'CNN Inside Man'],
+		['internationaldesk\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : International Desk', ''],
+		['inthearena\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : In The Arena', 'In The Arena'],
+		['inthefield\\.blogs\\.cnn\\.com', 'world', 'wrd : in the field', ''],
+		['johnkingusa\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : John King USA', 'John King USA'],
+		['joybehar\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : joy behar', 'joy behar'],
+		['larrykinglive\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : Larry King', 'Larry King'],
+		['lightyears\\.blogs\\.cnn\\.com', 'us', 'us : Light Years', ''],
+		['marquee\\.blogs\\.cnn\\.com', 'entertainment', 'ent : marquee blog', ''],
+		['mxp\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : Robin Meade', 'Robin Meade'],
+		['nancygrace\\.blogs\\.cnn\\.com', 'crime', 'crm : nancy grace', 'Nancy Grace'],
+		['newday\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : New Day', 'CNN New Day'],
+		['news\\.blogs\\.cnn\\.com', 'this just in', 'tjn : This Just In', ''],
+		['newsroom\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : CNN Newsroom', 'CNN Newsroom'],
+		['newsstream\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : News Stream', ''],
+		['ntm\\.blogs\\.cnn\\.com', '', 'News to Me Blog', ''],
+		['olympics\\.blogs\\.cnn\\.com', 'isport', 'spr: Olympics and the world', ''],
+		['outfront\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : outfront', 'Erin Burnett'],
+		['piersmorgan\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp: piers morgan tonight', 'piers morgan tonight'],
+		['politicalticker\\.blogs\\.cnn\\.com', 'politics', 'pol : political ticker', ''],
+		['prism\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : Prism', ''],
+		['questmeansbusiness\\.blogs\\.cnn\\.com', 'ibusiness', 'bus: Quest means business', ''],
+		['reliablesources\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : Reliable Sources', ''],
+		['religion\\.blogs\\.cnn\\.com', 'living', 'lvg : belief blog', ''],
+		['sanjayguptamd\\.blogs\\.cnn\\.com', 'health', 'hth : sanjay gupta md', ''],
+		['schoolsofthought\\.blogs\\.cnn\\.com', 'us', 'us : Schools of Thought', ''],
+		['scitech\\.blogs\\.cnn\\.com', 'tech', 'tch : sciTech', ''],
+		['screeningroom\\.blogs\\.cnn\\.com', 'entertainment', 'ent : the screening room', ''],
+		['security\\.blogs\\.cnn\\.com', 'other', 'oth : security ', ''],
+		['securityfiles\\.blogs\\.cnn\\.com', 'world', 'wrd : security files', ''],
+		['situationroom\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : The Situation Room', ''],
+		['sotu\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : State of the Union', ''],
+		['startingpoint\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : startingpoint', 'startingpoint'],
+		['strombo\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : strombo', 'strombo'],
+		['talktous\\.blogs\\.cnn\\.com', '', 'talk to us', ''],
+		['thechart\\.blogs\\.cnn\\.com', 'health', 'hth : the chart', ''],
+		['thebrief\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : The Brief', ''],
+		['thecnnfreedomproject\\.blogs\\.cnn\\.com', 'world', 'wrd : cnn freedom project', ''],
+		['thelead\\.blogs\\.cnn\\.com', 'cnn tv programs', 'tvp : thelead', 'jake tapper'],
+		['tips\\.blogs\\.cnn\\.com', 'living', 'lvg : clark\'s consumer tips', ''],
+		['ukelection\\.blogs\\.cnn\\.com', 'world', 'wrd : UK election', ''],
+		['unveiled\\.blogs\\.cnn\\.com', 'entertainment', 'ent : royal wedding blog', ''],
+		['whatsnext\\.blogs\\.cnn\\.com', 'tech', 'tch : what\'s next', ''],
+		['whitehouse\\.blogs\\.cnn\\.com', 'politics', 'pol : whitehouse blog', ''],
+		['worldsport\\.blogs\\.cnn\\.com', 'isport', 'spr: World Sport', '']
+
+
+	]
+
+
+};
+
+function cnn_adbpblogdata() {
+
+	var t_arr = [];
+
+	var t_url = window.location.href + '';
+
+	var t_map = cnn_adbpblogmap.data;
+
+	for(i = 0; i < t_map.length; i++) {
+
+		var t_mch = "/" + t_map[i][0] + "/";
+
+		if(t_url.match(t_mch)) {
+			t_map[i].shift();
+			t_arr = t_map[i];
+		}
+
+	}
+
+	return t_arr;
+
+}
+
+function cnn_adbpblogpop() {
+
+
+	//check for meta object
+	if (typeof cnn_metadata != 'undefined') {
+
+		//get adbp values
+		var t_adbpvars = cnn_adbpblogdata();
+
+		// some pages will have secton[2,..,n-1] set so we don't want to over-write it!
+		if (cnn_metadata.section.length > 2) {
+			cnn_metadata.section[0] = t_adbpvars[0];
+			cnn_metadata.section[1] = t_adbpvars[1];
+		} else {
+			cnn_metadata.section = [t_adbpvars[0], t_adbpvars[1]];
+		}
+		cnn_metadata.friendly_name = document.title;
+
+		//define template type default
+		cnn_metadata.template_type = 'blog front';
+
+		//do check for more specific tt
+		if(t_url.match(/\/category\//)) {
+			cnn_metadata.template_type = 'blog';
+		}
+		else if(t_url.match(/\/\d+\/\d+\//)) {
+			cnn_metadata.template_type = 'blog';
+		}
+
+		cnn_metadata.business.cnn.page.broadcast_franchise = t_adbpvars[2];
+
+		if(adbp_embed_count) {
+
+			cnn_metadata.business.cnn.page.video_embed_count = adbp_embed_count;
+			cnn_metadata.business.cnn.video.video_player = 'blog player';
+
+		}
+
+	}
+
+}
+
+function cnn_adbpsearchstr(str) {
+
+	var t_str = str;
+	var t_tt = '';
+	var t_i = null;
+
+	//if(t_str.search(/interactive/i) >= 0) { t_tt = 'interactive';t_i = t_str.search(/interactive/i); }
+	if(t_str.search(/chart/i) >= 0) { t_tt = 'chart';t_i = t_str.search(/chart/i); }
+	if(t_str.search(/map/i) >= 0) { t_tt = 'map';t_i = t_str.search(/map/i); }
+	if(t_str.search(/quiz/i) >= 0) { t_tt = 'quiz';t_i = t_str.search(/quiz/i); }
+	if(t_str.search(/timeline/i) >= 0) { t_tt = 'timeline';t_i = t_str.search(/timeline/i); }
+	if(t_str.search(/explainer/i) >= 0) { t_tt = 'explainer';t_i = t_str.search(/explainer/i); }
+	if(t_str.search(/gallery/i) >= 0) { t_tt = 'gallery';t_i = t_str.search(/gallery/i); }
+	if(t_str.search(/photo.wall/i) >= 0) { t_tt = 'photo wall';t_i = t_str.search(/photo.wall/i); }
+
+	if(t_i != null) {
+		return [t_i, t_tt];
+	}
+	else { return null; }
+
+}
+
+function cnn_adbptrackpgalimg(p_num, p_title) {
+
+
+	cnn_metadata.business.cnn.page.photo_gallery = p_title;
+	cnn_metadata.business.cnn.page.photo_slide = p_num;
+
+	var slide = {
+
+		'img' : p_num,
+		'title' : p_title
+
+	};
+
+	jsmd.trackMetrics("photo-page", slide);
+
+}
+
+
+
+}
+/*
+     FILE ARCHIVED ON 09:22:09 Oct 22, 2014 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 01:46:13 Jul 23, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 632.668
+  exclusion.robots: 0.061
+  exclusion.robots.policy: 0.053
+  cdx.remote: 0.049
+  esindex: 0.008
+  LoadShardBlock: 114.423 (3)
+  PetaboxLoader3.datanode: 8045.587 (5)
+  load_resource: 8810.443 (2)
+  PetaboxLoader3.resolve: 816.641 (2)
+*/

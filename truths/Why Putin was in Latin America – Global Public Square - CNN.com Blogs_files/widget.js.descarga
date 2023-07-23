@@ -1,0 +1,41 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+jQuery.extend(jQuery.easing,{easeOutCubic:function(x,t,b,c,d){return c*((t=t/d-1)*t*t+1)+b;}});jQuery(document).ready(function($){var isopen=false,bitHeight=$('#bitsubscribe').height(),$bit=$('#bit');setTimeout(function(){$bit.animate({bottom:'-'+bitHeight-30+'px'},200);if(document.location.href.indexOf('blogsub=')!==-1){open();}},300);var open=function(){if(isopen)return;isopen=true;$('a.bsub',$bit).addClass('open');$('#bitsubscribe',$bit).addClass('open')
+$bit.stop();$bit.animate({bottom:'0px'},{duration:400,easing:"easeOutCubic"});}
+var close=function(){if(!isopen)return;isopen=false;$bit.stop();$bit.animate({bottom:'-'+bitHeight-30+'px'},200,function(){$('a.bsub',$bit).removeClass('open');$('#bitsubscribe',$bit).removeClass('open');});}
+$('a.bsub',$bit).click(function(){if(!isopen)
+open();else
+close();});var target=$bit.has('form').length?$bit:$(document);target.keyup(function(e){if(27==e.keyCode)close();});$('#loggedout-follow').submit(function(){email=$('#loggedout-follow-field').val();if(''===email||!email.match(/^.*@.*\..*$/)){var error=LoggedOutFollow.invalid_email;$('#loggedout-follow-error').text(error).css('opacity',1).fadeIn('slow');$('#loggedout-follow-field').focus(function(){$('#loggedout-follow-error').fadeOut();});return false;}
+return true;});});
+
+}
+/*
+     FILE ARCHIVED ON 08:40:23 Oct 22, 2014 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 01:44:41 Jul 23, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 76.335
+  exclusion.robots: 0.106
+  exclusion.robots.policy: 0.095
+  RedisCDXSource: 0.68
+  esindex: 0.009
+  LoadShardBlock: 41.46 (3)
+  PetaboxLoader3.datanode: 61.984 (4)
+  load_resource: 50.845
+  PetaboxLoader3.resolve: 26.464
+*/

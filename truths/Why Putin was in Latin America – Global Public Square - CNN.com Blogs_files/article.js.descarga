@@ -1,0 +1,448 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+
+//check for or create a namespace
+if (typeof CNN === 'undefined') {
+	var CNN = Class.create();
+}
+
+Element.addMethods({
+	fireEvent: function(element,event){
+		var evt;
+		if(document.createEvent){
+			// dispatch for firefox + others
+			evt = document.createEvent("HTMLEvents");
+			evt.initEvent(event, true, true ); // event type,bubbling,cancelable
+			return !element.dispatchEvent(evt);
+		} else {
+			// dispatch for IE
+			evt = document.createEventObject();
+			return element.fireEvent('on'+event,evt);
+		}
+	}
+});
+
+//setup expandable elements module, using module pattern: http://yuiblog.com/blog/2007/06/12/module-pattern/
+CNN.expElements = function () {
+
+	//"private" methods
+	var resetVideo = function(mediaObj) {
+		if ( html5Check )
+		{
+			mediaObj.container.select('.html5player').each( function (n) { n.remove(); } );
+		}
+		else if (mediaObj.container.select('object').length > 0)
+		{
+			try {
+				if (mediaObj.player) {
+					mediaObj.player.pause();
+					//mediaObj.player.rewind();
+				}
+			} catch (e) {}
+		//	delete mediaObj.player;
+		}
+	}; //end resetVideo
+
+	var playVideoOrFlash = function(mediaObj) {
+
+		if (mediaObj.type === 'video') {
+			if ( html5Check )
+			{
+				for ( var node, i = 0, end = mediaObj.mediaContainer.children.length; i < end; i++ ) {
+					node = mediaObj.mediaContainer.children[i];
+					mediaObj.mediaContainer.removeChild( node );
+				}
+				cnnGetNoFlash( '640x360', mediaObj.mediaContainerId, mediaObj.source );
+			}
+			else
+			{
+				cnnCVPAdSection = (typeof cnnCVPAdSectionInPage !== 'undefined') ? cnnCVPAdSectionInPage:'';
+				if (typeof mediaObj.player === 'undefined') {
+					mediaObj.player = cnnGetPlayer(mediaObj.source, mediaObj.flash_context, {});
+				}
+
+				if (swfobject.hasFlashPlayerVersion("9")) {
+					mediaObj.player.canSetVolume = false;
+					mediaObj.player.canSetMute = false;
+					mediaObj.player.adVolumeEvents = [];
+					mediaObj.player.isAdPlaying = false;
+					mediaObj.player.embedSWF(mediaObj.mediaContainerId);
+					mediaObj.player.g_domIdStr = mediaObj.containerId;
+					mediaObj.player.g_context = mediaObj.flash_g_context; /* 416x250_start */
+				}
+
+				try {
+					if (mediaObj.player) {
+						mediaObj.player.id.play();
+					}
+				} catch (e) {}
+			}
+		} else if (mediaObj.type === 'gallery') {
+			if ( html5Check )
+			{
+				// do something!
+				// CNN_SlideShowManager.register was called in init
+			}
+			else
+			{
+				if (swfobject.hasFlashPlayerVersion("9")) {
+					mediaObj.cvpObj.embedSWF(mediaObj.mediaContainerId);
+				}
+			}
+		} else {
+			if (swfobject.hasFlashPlayerVersion("9")) {
+				mediaObj.cvpObj.embedSWF(mediaObj.mediaContainerId);
+			}
+		}
+	}; //end playVideoOrFlash
+
+	var contractElement = function (close, image, timestamp, mediaObj) {
+		close.removeClassName('box-opened');
+		close.hide();
+		mediaObj.container.hide();
+		image.show();
+		mediaObj.parentDiv.removeClassName('cnn_strylftcexp');
+		mediaObj.parentDiv.setStyle({
+			paddingLeft: '10px'
+		});
+		Event.fire( mediaObj.parentDiv, 'cnn:video_contract' );
+
+		var animate = new Effect.Morph(image, {
+			afterFinish: function(){
+				mediaObj.container.setStyle({ paddingTop: "0px" });
+				image.setStyle({cursor: "pointer"});
+				image.setAttribute("src", mediaObj.lgImage);
+				timestamp.show();
+				if (typeof mediaObj.clickToPlay !== 'undefined') {
+					mediaObj.clickToPlay.show();
+				}
+				if (mediaObj.type === 'video') {
+					resetVideo(mediaObj);
+				}
+			},
+			style: {
+				width: mediaObj.origImageX + "px",
+				height: mediaObj.origImageY + "px",
+				paddingTop: "0px"
+			},
+			duration: 0.6,
+			transition: Effect.Transitions.easeOutQuint
+		});
+	}; //end contractElement
+
+	var correctBG = function(mediaObj){
+		mediaObj.container.setStyle({
+			background: "none"
+		});
+	};
+
+	var expandElement = function (close, image, timestamp, mediaObj) {
+		if (image.getWidth() > 300) {
+			return;
+		}
+
+		playVideoOrFlash(mediaObj);
+
+		if (typeof mediaObj.clickToPlay !== 'undefined') {
+			mediaObj.clickToPlay.hide();
+		}
+		timestamp.hide();
+
+		//close any currently open boxes (technically should only be one)
+		if ($$('.box-opened').length) {
+			$$('.box-opened').each(function(val){
+				Element.fireEvent(val, 'click');
+			});
+		}
+		close.addClassName('box-opened');
+
+		image.setStyle({cursor: "default"});
+		mediaObj.parentDiv.addClassName('cnn_strylftcexp');
+		image.setAttribute("src", mediaObj.lgImage);
+		mediaObj.parentDiv.setStyle({
+			paddingLeft: '0px'
+		});
+		Event.fire( mediaObj.parentDiv, 'cnn:video_expand' );
+		
+		var animate;
+		if ( html5Check )
+		{
+			animate = new Effect.Morph(
+				image,
+				{
+					beforeFinish: function () {
+						if ( mediaObj.type !== 'video' && mediaObj.type !== 'gallery' )
+						{
+							$(mediaObj.container).update('<img src="http://web.archive.org/web/20141022092529/http://i.cdn.turner.com/cnn/.element/img/3.0/global/misc/640x360_ns_ipad.gif" width="640" height="360" alt="" border="0">');
+							mediaObj.container.show();
+							image.hide();
+						}
+					},
+					afterFinish: function () {
+						mediaObj.container.setStyle({ paddingTop: "40px" });
+						close.show();
+						close.setStyle({
+							'cursor': "pointer"
+						});
+						image.hide();
+						mediaObj.container.show();
+					},
+					style: {
+						width: mediaObj.lgImageX + "px",
+						height: mediaObj.lgImageY + "px",
+						paddingTop: "40px"
+					},
+					duration: 0.6,
+					transition: Effect.Transitions.easeOutQuint
+				}
+			);
+		}
+		else
+		{
+			mediaObj.container.setStyle({
+				background: "url('" + mediaObj.lgImage + "') 0px 40px no-repeat"
+			});
+			animate = new Effect.Morph(
+				image,
+				{
+					beforeStart: function() {
+						for (i in CVP.instances) {
+							try {
+								CVP.findInstance(i).pause();
+							} catch(e) {}
+						}
+					},
+					beforeFinish: function() {
+						if (!swfobject.hasFlashPlayerVersion("9")) {
+							$(mediaObj.container).update('<a href="http://web.archive.org/web/20141022092529/http://get.adobe.com/flashplayer/" target="_blank" class="cnn_no_flash"><img src="http://web.archive.org/web/20141022092529/http://i.cdn.turner.com/cnn/.element/img/3.0/global/misc/640x360_no_flash.gif" width="640" height="360" alt="" border="0"></a>');
+							mediaObj.container.show();
+							image.hide();
+						}
+					},
+					afterFinish: function(){
+						mediaObj.container.setStyle({ paddingTop: "40px" });
+						close.show();
+						close.setStyle({
+							'cursor': "pointer"
+						});
+						if (mediaObj.type !== 'video') {
+							var checkReady = setInterval (function() {
+								if (mediaObj.container.select('object').length > 0) {
+									mediaObj.container.show();
+									image.hide();
+									clearInterval(checkReady);
+									setTimeout(function(){
+										correctBG(mediaObj);
+									}, 300);
+								}
+							}, 100);
+						} else {
+							image.hide();
+							mediaObj.container.show();
+						}
+					},
+					style: {
+						width: mediaObj.lgImageX + "px",
+						height: mediaObj.lgImageY + "px",
+						paddingTop: "40px"
+					},
+					duration: 0.6,
+					transition: Effect.Transitions.easeOutQuint
+				}
+			);
+		}
+	}; //end expandElement
+
+	return {
+		init: function () {
+
+			//fixIE6flicker
+			try {
+				document.execCommand('BackgroundImageCache', false, true);
+			} catch(e) {}
+
+			//setup candidate divs
+			$$('div.cnn_strylftcexpbx').each(
+				function(val) {
+
+					var close = val.select('div.cnn_strylceclbtn')[0];
+					var image = val.select('img.box-image')[0];
+					var timestamp = val.select('cite')[0];
+					var mediaObj = CNN.expElements[ val.id + 'Store' ];
+
+					close.hide();
+
+					//preload large images
+					if (mediaObj.lgImage !== 'false') {
+						var preloadImg = new Image(mediaObj.lgImageX, mediaObj.lgImageY);
+						preloadImg.src = mediaObj.lgImage;
+					}
+
+					//setup hidden video container w/large image for alt content
+					var containerId = 'videoContainer' + val.id;
+					image.insert ({
+						'before':
+							'<div id="' + containerId + '" class="parentMediaContainer"><div id="' + containerId + 'Media" class="mediaContainer" /></div>'
+					});
+					mediaObj.parentDiv = val;
+					mediaObj.timestamp = timestamp;
+					mediaObj.containerId = containerId;
+					mediaObj.mediaContainerId = containerId + 'Media';
+					mediaObj.mediaContainer = $(mediaObj.mediaContainerId);
+					mediaObj.container = $(containerId);
+					mediaObj.container.hide();
+
+					if ( 'undefined' === typeof ( mediaObj.flash_context ) ) {
+						// default video context for flash player
+						mediaObj.flash_context = '640x384_start_art_inpage';
+					}
+					
+					if ( 'undefined' === typeof ( mediaObj.flash_g_context ) ) {
+						// if no flash_g_context exists then use the global flash_context
+						mediaObj.flash_g_context = ( 'undefined' === typeof ( mediaObj.flash_context ) ) ? '640x384_start_art_inpage' : mediaObj.flash_context;
+					}
+					
+					//adding in play buttons
+					if (mediaObj.type === 'video') {
+						image.insert ({
+							'before':
+								'<div id="clickToPlay' + containerId + '" class="clickToPlay" />'
+						});
+						mediaObj.clickToPlay = $('clickToPlay' + containerId);
+						mediaObj.clickToPlay.setStyle({cursor: "pointer"});
+						Event.observe(mediaObj.clickToPlay, 'mouseover', function() { mediaObj.clickToPlay.addClassName('hover'); });
+						Event.observe(mediaObj.clickToPlay, 'mouseout', function() { mediaObj.clickToPlay.removeClassName('hover'); });
+						Event.observe(mediaObj.clickToPlay, 'click', function() { expandElement(close, image, timestamp, mediaObj);});
+					}
+					// html5 photo gallery
+					else if ( mediaObj.type === 'gallery' && html5Check )
+					{
+						CNN_SlideShowManager.register( containerId + 'Media', mediaObj.galleryUrl.match( /[^?&=]+\/flashxml\/index\.xml/ )[0] );
+					}
+					else if ( html5Check )
+					{
+						// if we don't have an HTML5 replacement, we have to remove the element from the page
+						val.remove();
+						return;  // boom!
+					}
+
+					var mediaWidth = mediaObj.lgImageX;
+					var mediaHeight = mediaObj.lgImageY;
+					var wmode = 'transparent';
+					//audio doesn't expand
+					if (mediaObj.type === 'audio') {
+						mediaWidth = mediaObj.origImageX;
+						mediaHeight = mediaObj.origImageY;
+						wmode = 'opaque';
+					}
+
+					if (mediaObj.lgImage) {
+						mediaObj.mediaContainer.update('<img src="' + mediaObj.lgImage + '" width="' + mediaWidth + '" height="' + mediaHeight + '" alt="" />');
+					}
+
+					//any data?
+					if (typeof mediaObj.data === 'undefined') { mediaObj.data = ''; }
+
+					//is it in image gallery?
+					if (typeof mediaObj.galleryUrl === 'undefined') { mediaObj.galleryUrl = ''; }
+					//has content type?
+					if (typeof mediaObj.contentType === 'undefined') { mediaObj.contentType = ''; }
+
+					//setup CVP (in this case, used for video and normal Flash)
+					mediaObj.runOnce = false;
+					mediaObj.cvpObj = new CVP({
+						id : 'cvp_'+ containerId,
+						width : mediaWidth,
+						height : mediaHeight,
+						flashVars : {
+							galleryUrl : mediaObj.galleryUrl,
+							data : mediaObj.data
+						},
+						embed : {
+							containerSwf : mediaObj.source,
+							options : {
+								wmode: wmode
+							}
+						}
+					});
+
+					//test if audio, no click listeners
+					if (mediaObj.type === 'audio') {
+						image.hide();
+						close.addClassName('box-opened');
+						close.show();
+						close.setStyle({
+							'position': 'absolute',
+							'left': '-9999px'
+						});
+						mediaObj.container.show();
+						mediaObj.cvpObj.embedSWF(mediaObj.mediaContainerId);
+					} else {
+						//setup listeners
+						image.setStyle({cursor: "pointer"});
+						Event.observe(image, 'click', function() { expandElement(close, image, timestamp, mediaObj); });
+						Event.observe(close, 'click', function() { contractElement(close, image, timestamp, mediaObj); });
+					}
+				}
+			);
+
+			//setup candidate trigger links
+			$$('a').findAll(function(s) { return s.readAttribute('rel') === 'triggerExpand'; }).each(function(link) {
+				try {
+					var valId = (typeof CNN.expandableMap === 'object') ? link.readAttribute('href').substring(1).replace('expand',''): link.readAttribute('href').substring(1);
+
+					var val = (typeof CNN.expandableMap === 'object') ? $(CNN.expandableMap[valId]) : $(valId);
+
+					var close = val.select('div.cnn_strylceclbtn')[0];
+					var image = val.select('img.box-image')[0];
+					var timestamp = val.select('cite')[0];
+					var mediaObj = CNN.expElements[ val.id + 'Store' ];
+
+					link.writeAttribute('href','javas' + 'cript: void(0);');
+					link.setStyle({cursor: "pointer"});
+
+					Event.observe(link, 'click', function() {
+						if (mediaObj.type !== 'audio') {
+							expandElement(close, image, timestamp, mediaObj);
+						}
+						val.scrollTo();
+					});
+				} catch(e) {}
+			});
+		} //end init
+	};
+}(); //the parens here cause the anonymous function for 'expandable elements module' to execute and return
+
+
+
+}
+/*
+     FILE ARCHIVED ON 09:25:29 Oct 22, 2014 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 01:44:44 Jul 23, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 742.191
+  exclusion.robots: 0.081
+  exclusion.robots.policy: 0.072
+  cdx.remote: 0.057
+  esindex: 0.009
+  LoadShardBlock: 134.342 (3)
+  PetaboxLoader3.datanode: 80.222 (5)
+  load_resource: 356.079 (2)
+  PetaboxLoader3.resolve: 321.776 (2)
+*/
