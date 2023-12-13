@@ -111,6 +111,15 @@ donation-banner-thermometer {
     align-items: center;
     justify-content: center;
   }
+
+
+  #donate_banner .mobile-body-content {
+    display: none;
+  }
+
+  #donate_banner .desktop-body-content {
+    display: block;
+  }
 }
 
 @media (max-width: 767px) {
@@ -140,6 +149,14 @@ donation-banner-thermometer {
 
   #donate_banner {
     border-bottom: none;
+  }
+
+  #donate_banner .mobile-body-content {
+    display: block;
+  }
+
+  #donate_banner .desktop-body-content {
+    display: none;
   }
 }
 
@@ -473,4 +490,71 @@ p.payment-secure-notice {
   #donate_banner .hide-separator .banner-image {
     margin-right: 4rem;
   }
+}
+
+/* PSA Banner */
+#donate_banner.formdesign-psa {
+  min-height: 40px;
+  background: var(--donationBannerChevronBG, #194880) !important;
+  position: relative;
+  padding: 10px;
+  color: #fff;
+}
+
+#donate_banner.formdesign-psa .ia-banner.psa {
+  background: var(--donationBannerChevronBG, #194880) !important;
+  padding: 0 !important;
+  display: flex;
+  position: unset;
+}
+
+#donate_banner #donate-close-button.banner-close button {
+  padding: 0;
+  border-radius: 16px !important;
+  appearance: none;
+  font-size: 1.4rem;
+  color: #2c2c2c;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
+}
+
+#donate_banner #donate-close-button.banner-close button:before {
+  display: block;
+  width: 16px;
+  height: 16px;
+  content: "";
+  background: transparent url(/images/dismiss.svg) 0 0 no-repeat;
+}
+
+#donate_banner #donate-close-button.banner-close {
+  align-self: center;
+  justify-self: end;
+  position: absolute;
+  right: 10px;
+  line-height: 1rem;
+}
+
+#donate_banner .ia-banner p {
+  margin: 0;
+  font-size: 1.4rem;
+  padding-right: 15px;
+}
+
+#donate_banner .ia-banner a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#donate_banner .ia-banner a:hover {
+  color: #fff;
+}
+
+#donate-close-button fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  min-width: 0;
 }

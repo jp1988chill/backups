@@ -1,0 +1,396 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+//widgets everywhere; jquery does not approve this message
+(function ShareWidget(type, version, dependencies){
+
+	var widgetURI=window.widgetURI=baseURI+'/'+type+'/'+version;
+
+	//load in APIs for desktop
+	("FB" in window) || dependencies.push("//web.archive.org/web/20141024145042/http://connect.facebook.net/en_US/all.js");
+	if(window.cnn_sharebarconfig.plugincodes['googleplus'] !== '') { ("gapi" in window) || dependencies.push("http://web.archive.org/web/20141024145042/https://apis.google.com/js/plusone.js"); }
+
+	//oh knockout you so crazy
+	("ko" in window) || dependencies.push("http://web.archive.org/web/20141024145042/http://z.cdn.turner.com/cnn/.e/js/libs/knockout-2.1.0.js");
+
+	("ShareBarModel" in window) || dependencies.push(widgetURI+'/model.js');
+
+
+	//define cnn share json
+	window.CNNSHARE = {
+
+		'url' : '',
+	
+		//model - keep for now
+		'model' : null,
+	
+		//configuration
+		'config' : window.cnn_sharebarconfig,
+	
+		//main social sites configurations
+		'sites' : {
+	
+			'twitter' : {
+		
+				'iscountable' : 0,
+			
+				'count' : -1,
+			
+				'getcount' : function() {
+				
+					//no no no
+					var t_url = 'http:\/\/web.archive.org\/web\/20141024145042\/http:\/\/urls.api.twitter.com/1/urls/count.json?url=' + encodeURIComponent(CNNSHARE.config.url);
+
+					//jsonp it
+					jQuery.ajax({
+						url: t_url,
+						dataType: 'jsonp',
+						success: function(data) {
+  							window.CNNSHARE.updatecount(data.count, 'twitter');
+  						}
+					
+					});
+					
+					
+				},
+				
+				'render' : function() {
+				
+				},
+				
+				'init' : function() {
+			
+					if(window.cnn_sharebarconfig.plugincodes['twitter'] !== '') {
+					
+						/*!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://web.archive.org/web/20141024145042/https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+						*/
+						
+						//load in api
+						if(window.twttr) {
+						  twttr.widgets.load() ; 
+						}
+						else {
+						   window.twttr = (function (d,s,id) { 
+						        var t, js, fjs = d.getElementsByTagName(s)[0]; 
+						        if (d.getElementById(id)) return; js=d.createElement(s); js.id=id; 
+						        js.src="//web.archive.org/web/20141024145042/http://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); 
+						        return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } }); 
+						    }(document, "script", "twitter-wjs")); 
+						}					  
+						//setup tracking
+						window.twttr.ready(function (twttr) {
+							twttr.events.bind('click', function(event) {
+								window.CNNSHARE.trackevent({'service':'twitter', 'analyticsPlatform':CNNSHARE.config.analytics, 'type':'click'});
+							});
+						});
+
+					}
+					
+					
+				}
+			
+			},
+		
+			'googleplus' : {
+		
+				'iscountable' : 0,
+			
+				'count' : -1,
+
+				'ready' : 0,
+			
+				'render' : function() {
+					gapi.plusone.go();
+				},
+			
+				'init' : function() {
+			
+					//render button
+					if(CNNSHARE.config.plugincodes['googleplus'] !== '') {
+						
+						gapi.plusone.go();
+					
+					}
+						
+				}
+			
+			},
+		
+			'linkedin' : {
+		
+				'iscountable' : 0,
+			
+				'count' : -1,
+			
+				'getcount' : function() {
+				
+					var t_url = 'http:\/\/web.archive.org\/web\/20141024145042\/http:\/\/www.linkedin.com/countserv/count/share?url=' + encodeURIComponent(CNNSHARE.config.url) + '&format=jsonp';
+				
+					//jsonp it
+					jQuery.ajax({
+						url: t_url,
+						dataType: 'jsonp',
+						success: function(data) {
+							window.CNNSHARE.updatecount(data.count, 'linkedin');
+  						}
+					
+					});
+				
+				},
+				
+				'init' : function() {
+			
+					if(CNNSHARE.config.plugincodes['linkedin'] !== '') {
+					
+						jQuery.getScript("http://web.archive.org/web/20141024145042/http://platform.linkedin.com/in.js", function success() {
+							//IN.init({ onLoad: "myOnloadFunction" });
+						});
+					
+					}
+			
+				}
+		
+			},
+		
+			'facebook' : {
+		
+				'iscountable' : 0,
+			
+				'count' : -1,
+			
+				//get rid of duplicates
+				'started' : 0,
+			
+				'ready' : 0,
+			
+				'getcount' : function() {
+				
+					var t_url = 'http:\/\/web.archive.org\/web\/20141024145042\/https:\/\/graph.facebook.com/fql/?q=select%20total_count%20from%20link_stat%20where%20url%20in%20%22' + encodeURIComponent(CNNSHARE.config.url) + '%22&format=json';
+
+					//jsonp it
+					jQuery.ajax({
+						url: t_url,
+						dataType: 'jsonp',
+						success: function(data) {
+							window.CNNSHARE.updatecount(data.data[0].total_count, 'facebook');
+  						}
+					
+					});
+
+				
+				},
+				
+				'init' : function() {
+			
+					FB.init({
+						appId      : '80401312489', // App ID
+						status     : true, // check login status
+						cookie     : true, // enable cookies to allow the server to access the session
+						xfbml      : false,  // parse XFBML
+						oauth      : true
+					});
+					
+					//parse
+					FB.XFBML.parse();
+					
+					//subscribe
+					FB.Event.subscribe('edge.create', function(targetUrl) {
+						window.CNNSHARE.trackevent({'service':'facebook', 'analyticsPlatform':CNNSHARE.config.analytics, 'type':'click'});
+					});
+					
+
+				}
+			
+			}
+	
+		},
+	
+		'setanalytics' : function(a_val) {
+			CNNSHARE.analytics = a_val;
+		},
+	
+		'updateurl' : function(url) {
+	
+	
+	
+		},
+	
+		'updatecount' : function(cnt, site) {
+	
+			var t_site = site + '';
+			t_site = t_site.toLowerCase();
+		
+			if(CNNSHARE.sites[t_site] && CNNSHARE.sites[t_site].iscountable) {
+		
+				CNNSHARE.sites[t_site].count = cnt;
+			
+				var t_str = '.cnn_widget_count_bubble_' + t_site;
+			
+				//update html with counts
+				jQuery(t_str).each(function() {
+					jQuery(this).html(cnt);
+				});
+			
+			}
+		
+		},
+	
+		'trackevent' : function(options) {
+	
+			if(window.console) {
+				//console.log(options);
+			}
+	
+			try {
+		
+				if(options.analyticsPlatform === 'o') {
+		
+					if(jsmd) {
+						if(options.type === 'click') {
+
+							jsmd.trackMetrics("social-click", {'clickObj':{'socialType':options.service + '_click'}});
+
+						}
+						else if(options.type === 'success')	{
+							jsmd.trackMetrics("social-click", {'clickObj':{'socialType':options.service + '_post'}});
+						}			
+					}
+
+				}	
+				else if(options.analyticsPlatform  === 'b') {
+
+					if(typeof(bangoSocial) === 'function') {
+						bangoSocial({'socialMedia':options.service });		
+					}	
+
+				}
+
+			}
+			catch(e) {
+
+				if(window.console) {
+					console.log("error thrown while registering click tracking. Message - " + e.message);
+				}
+
+			}	
+	
+		},
+	
+		'share' : function(site_id) {
+	
+			CNNSHARE.trackevent({'service':site_id, 'analyticsPlatform':CNNSHARE.config.analytics, 'type':'click'});
+	
+		},
+
+		'init' : function(el) {
+	
+			if(window.console) {
+				//console.log('initializing CNNSHARE');
+			}
+		
+		
+			CNNSHARE.sites.twitter.init();
+			CNNSHARE.sites.linkedin.init();
+			CNNSHARE.sites.facebook.init();
+			CNNSHARE.sites.googleplus.init();
+		
+		}
+	
+	
+	}; //end CNNSHARE
+
+
+
+	//track google plus
+	window.cnn_plusone_vote = function(data) {
+
+		if(data.state === "on") {
+			window.CNNSHARE.trackevent({'service':'googleplus', 'analyticsPlatform':window.CNNSHARE.config.analytics, 'type':'click'});
+		}
+		else if(data.state === "off") {
+		
+		}
+		
+	}; //end cnn_plusone_vote
+
+
+	//track linkedin
+	window.cnn_linkedin_share = function() {
+	
+		window.CNNSHARE.trackevent({'service':'linkedin', 'analyticsPlatform':window.CNNSHARE.config.analytics, 'type':'click'});
+	
+	}; //end cnn_linkedin_share
+	
+	
+	//make sure number of instances defined
+	if(!CNNSHARE.config.instances) {
+		if(window.console) {
+			console.log('Error: sharebar count not set in config!');
+		}
+	}
+		
+	
+	
+	//load the widgets
+	loadWidget(type, version, dependencies, shareBarInit);
+	
+
+
+	var sb_started = 0;
+	
+	//start up each instance
+	function shareBarInit(el){
+		
+		sb_started++;
+		
+		if(window.console) {
+			//console.log(sb_started);
+		}
+		
+		//create model and do knockout bindings
+		var t_model = new ShareBarModel(cnn_sharebarconfig);
+		ko.applyBindings(t_model, el);
+
+
+		//start up share object
+		if(sb_started === window.CNNSHARE.config.instances) {
+			window.CNNSHARE.init();
+		}
+	
+	} //end shareBarInit
+	
+
+	
+}("sharebar", "0.2.2", []));
+
+
+}
+/*
+     FILE ARCHIVED ON 14:50:42 Oct 24, 2014 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 22:43:14 Dec 13, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 175.481
+  exclusion.robots: 0.14
+  exclusion.robots.policy: 0.128
+  cdx.remote: 0.065
+  esindex: 0.01
+  LoadShardBlock: 117.288 (3)
+  PetaboxLoader3.datanode: 74.054 (4)
+  load_resource: 143.529
+  PetaboxLoader3.resolve: 101.074
+*/
